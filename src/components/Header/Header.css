@@ -1,0 +1,62 @@
+.header {
+  height: 39vw;
+  margin: 20px auto;
+  background: url('/medi.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  color: white; /* makes text visible on dark overlay */
+  overflow: hidden;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* black with 50% transparency */
+  z-index: 1;
+}
+
+.header * {
+  position: relative;
+  z-index: 2; /* makes sure your text appears above the overlay */
+}
+
+
+.header-contents{
+    position: absolute;
+    display:flex;
+    flex-direction:column;
+    align-items: start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom:10%;
+    left:6vw;
+    animation: fadeIn 3s;
+
+}
+
+.header-contents h2{
+    font-weight: 500;
+    color:white;
+    font-size: max(4.5vw,22px);
+}
+
+.header-contents p{
+    font-weight: 1vw;
+    color:white;
+    
+}
+
+.header-contents button{
+    border: nonw;
+    color: #747474;
+    font-weight: 500;
+    padding: 1vw 2.3vw;
+    background-color:white;
+    font-size: max(1vw,13px);
+    border-radius: 50px;
+}
+

@@ -1,0 +1,38 @@
+.explore-equipment-list {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  margin: 20px 0;
+  overflow-x: auto;          /* horizontal scroll enabled */
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+  cursor: grab;              /* shows user can drag */
+}
+
+.explore-equipment-list:active {
+  cursor: grabbing;          /* cursor while dragging */
+}
+
+.explore-equipment-list::-webkit-scrollbar {
+  display: none;             /* hides scrollbar */
+}
+
+.explore-equipment-list-item {
+  flex: 0 0 auto;            /* items take natural width */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.explore-equipment-list-item:hover {
+  transform: scale(1.05);
+}
+
+.explore-equipment-list-item img{
+  width: 9.62vw;
+  min-width: 90px;
+  cursor: pointer;
+  border-radius:50%;
+  transition:0.2s;
+
+}
