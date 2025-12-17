@@ -1,0 +1,106 @@
+/* ---------- Page Container ---------- */
+.page-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- Heading ---------- */
+.page-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* ---------- Form Layout ---------- */
+.equipment-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+/* ---------- Full-width elements (like submit button) ---------- */
+.equipment-form .full-width {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Labels ---------- */
+.equipment-form label {
+  display: block;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* ---------- Inputs and Selects ---------- */
+.equipment-form input,
+.equipment-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.equipment-form input:disabled,
+.equipment-form select:disabled {
+  background-color: #e9ecef;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.equipment-form input:focus,
+.equipment-form select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 6px rgba(74, 144, 226, 0.3);
+  outline: none;
+}
+
+/* ---------- Image Preview ---------- */
+.preview-img {
+  margin-top: 10px;
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+/* ---------- Submit Button ---------- */
+.submit-btn {
+  padding: 12px 20px;
+  background-color: #4a90e2;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .equipment-form {
+    grid-template-columns: 1fr;
+    gap: 15px 0;
+  }
+
+  .submit-btn {
+    font-size: 16px;
+    padding: 10px 16px;
+  }
+}

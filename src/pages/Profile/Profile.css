@@ -1,0 +1,72 @@
+.profile-container {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f6f7fb;
+  padding: 40px 20px;
+}
+
+.profile-box {
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease;
+}
+
+.profile-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.profile-info {
+  margin-top: 10px;
+}
+
+.profile-info p {
+  font-size: 16px;
+  margin: 12px 0;
+  color: #444;
+}
+
+.profile-info span {
+  font-weight: 600;
+  color: #222;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #ff4d4d;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+}
+
+.logout-btn:hover {
+  background-color: #e60000;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

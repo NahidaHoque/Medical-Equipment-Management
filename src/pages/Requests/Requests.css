@@ -1,0 +1,70 @@
+/* Requests.css */
+.requests-container {
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.requests-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.requests-table th,
+.requests-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.requests-table th {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: 600;
+}
+
+.requests-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.requests-table tr:hover {
+  background-color: #e0f7fa;
+}
+
+.requests-table img {
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.verify-btn {
+  padding: 6px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.verify-btn.verify {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.verify-btn.unverify {
+  background-color: #f44336;
+  color: white;
+}
+
+.verify-btn:hover {
+  transform: scale(1.05);
+}

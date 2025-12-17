@@ -1,0 +1,182 @@
+.raw-materials-container {
+  width: 70%;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.raw-materials-container h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Form Section */
+.raw-material-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Input + Select + File Upload */
+.raw-material-form input,
+.raw-material-form select {
+  height: 45px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  transition: 0.3s;
+  background: #fff;
+}
+
+.raw-material-form input:focus,
+.raw-material-form select:focus {
+  border-color: #3498db;
+}
+
+/* Image Upload */
+.image-upload-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.image-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+  margin-top: 5px;
+}
+
+/* Add Button */
+.raw-material-form button {
+  padding: 12px 18px;
+  border: none;
+  background: #3498db;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.raw-material-form button:hover {
+  background: #2980b9;
+}
+
+/* Raw Materials List */
+.raw-material-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.raw-material-list th,
+.raw-material-list td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 15px;
+}
+
+.raw-material-list th {
+  background: #f7f7f7;
+  font-weight: 600;
+  color: #333;
+}
+
+.raw-material-list tr:hover {
+  background: #f2f7ff;
+}
+
+/* Action Buttons */
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.edit-btn {
+  background: #f1c40f;
+  color: #000;
+  margin-right: 8px;
+}
+
+.edit-btn:hover {
+  background: #d4ac0d;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+/* Table Image Styling */
+.raw-material-list img {
+  width: 60px;          /* Set a fixed width */
+  height: 60px;         /* Set a fixed height */
+  object-fit: cover;    /* Crop and scale image to fit */
+  border-radius: 8px;   /* Rounded corners */
+  border: 1px solid #ccc;
+}
+
+/* Optional: add hover effect */
+.raw-material-list img:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .raw-material-list img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .raw-materials-container {
+    width: 95%;
+  }
+
+  .raw-material-list th,
+  .raw-material-list td {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .raw-material-form input,
+  .raw-material-form select {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .raw-material-form button {
+    height: 42px;
+  }
+
+  .image-preview {
+    width: 100px;
+    height: 100px;
+  }
+}

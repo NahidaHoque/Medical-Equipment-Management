@@ -2,72 +2,81 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./PlaceOrder.css";
+import "./Transporter.css";
 
-const OrderPage = ({ account, contract, url }) => {
+const Transporter = ({ account, contract, url }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState({}); // track which orders are being updated
-
-  // Logged-in user from localStorage
-  const currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
   // Fetch all orders from backend
   const fetchOrders = async () => {
     try {
-      const res = await axios.get(`${url}/api/orders`);
+      const res = await axios.get(`http://localhost:4000/api/orders`);
       if (res.data.success) {
         setOrders(res.data.data);
-        localStorage.setItem("orders", JSON.stringify(res.data.data));
       } else {
-        const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-        setOrders(savedOrders);
+        setOrders([]);
+        console.error("Failed to fetch orders");
       }
     } catch (err) {
+      setOrders([]);
       console.error("Error fetching orders:", err);
-      const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-      setOrders(savedOrders);
     } finally {
       setLoading(false);
     }
   };
 
-  // Mark order as delivered
-  const markDelivered = async (order) => {
+  // Mark order as shipped
+  const markShipped = async (order) => {
     if (!account || !contract) {
-      toast.error("Connect your wallet first!");
+      toast.warning("Connect your wallet first!");
       return;
     }
 
     try {
-      setUpdating((prev) => ({ ...prev, [order._id]: true }));
-
-      // 1️⃣ Call Solidity smart contract
-      await contract.methods
-        .confirmDelivery(order.orderId)
+      // 1️⃣ Mark shipped on blockchain
+      const tx = await contract.methods
+        .shipEquipment(order.orderId)
         .send({ from: account, gas: 300000 });
 
-      toast.success("Order confirmed delivered on blockchain!");
+      const txHash = tx.transactionHash;
+      toast.success("Order marked as shipped on blockchain!");
 
-      // 2️⃣ Update backend
-      const res = await axios.put(`${url}/api/orders/deliver/${order._id}`, {
-        role: "hospital",
+      // 2️⃣ Get transporter name from contract
+      let transporterName = "Unknown";
+      try {
+        const user = await contract.methods.userDetails(account).call();
+        transporterName = user.name || "Unknown";
+      } catch (err) {
+        console.warn("Failed to fetch transporter name from contract:", err);
+      }
+
+      // 3️⃣ Save transporter order info to backend
+      for (const item of order.items) {
+        await axios.post(`http://localhost:4000/api/transporter-orders/create`, {
+          orderId: order.orderId,
+          orderDate: order.orderDate,
+          txHash,
+          hospitalName: order.user.name,
+          hospitalWallet: order.user.walletAddress,
+          equipmentId: item.equipmentId,
+          equipmentName: item.name,
+          transporterName,
+          transporterWallet: account,
+        });
+      }
+
+      // 4️⃣ Update backend orders as shipped
+      await axios.put(`http://localhost:4000/api/orders/ship/${order._id}`, {
+        role: "transporter",
+        txHash,
       });
 
-      if (res.data.success) {
-        // Update local state immediately
-        setOrders((prev) =>
-          prev.map((o) => (o._id === order._id ? { ...o, delivered: true } : o))
-        );
-        toast.success(res.data.message || "Order marked as delivered!");
-      } else {
-        toast.error(res.data.message || "Failed to mark delivered");
-      }
+      fetchOrders(); // refresh orders
+      toast.success("Transporter order info saved successfully!");
     } catch (err) {
-      console.error("Error marking delivery:", err);
-      toast.error("Error marking order delivered. Check console.");
-    } finally {
-      setUpdating((prev) => ({ ...prev, [order._id]: false }));
+      console.error("Error marking order as shipped:", err);
+      toast.error("Failed to mark order as shipped. Check console.");
     }
   };
 
@@ -76,18 +85,18 @@ const OrderPage = ({ account, contract, url }) => {
   }, []);
 
   if (loading) return <p>Loading orders...</p>;
-  if (!orders.length) return <p>No orders found.</p>;
+  if (orders.length === 0) return <p>No orders found.</p>;
 
   return (
     <div className="order-container">
       <ToastContainer position="top-right" autoClose={3000} />
-      <h2>All Orders</h2>
+      <h2>Transporter Shipment Management</h2>
       <table className="order-table">
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Date</th>
-            <th>User</th>
+            <th>Order Date</th>
+            <th>Hospital</th>
             <th>Contact</th>
             <th>Total Price</th>
             <th>Status</th>
@@ -111,11 +120,7 @@ const OrderPage = ({ account, contract, url }) => {
               <td>${order.totalPrice}</td>
               <td>
                 <span className={order.shipped ? "status shipped" : "status pending"}>
-                  Shipped: {order.shipped ? "✔" : "❌"}
-                </span>
-                <br />
-                <span className={order.delivered ? "status delivered" : "status pending"}>
-                  Delivered: {order.delivered ? "✔" : "❌"}
+                  {order.shipped ? "Shipped ✔" : "Pending ❌"}
                 </span>
               </td>
               <td>
@@ -137,7 +142,12 @@ const OrderPage = ({ account, contract, url }) => {
                             <img
                               src={`${url}/uploads/equipment/${item.image}`}
                               alt={item.name}
-                              style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "4px" }}
+                              style={{
+                                width: "60px",
+                                height: "60px",
+                                objectFit: "cover",
+                                borderRadius: "4px",
+                              }}
                             />
                           )}
                         </td>
@@ -151,17 +161,13 @@ const OrderPage = ({ account, contract, url }) => {
                 </table>
               </td>
               <td>
-                {order.shipped && !order.delivered ? (
-                  <button
-                    className="deliver-btn"
-                    onClick={() => markDelivered(order)}
-                    disabled={updating[order._id]}
-                  >
-                    {updating[order._id] ? "Updating..." : "Mark Delivered"}
-                  </button>
-                ) : order.delivered ? (
-                  <span>Delivered ✔</span>
-                ) : null}
+                <button
+                  className="ship-btn"
+                  disabled={order.shipped}
+                  onClick={() => markShipped(order)}
+                >
+                  {order.shipped ? "Shipped" : "Mark Shipped"}
+                </button>
               </td>
             </tr>
           ))}
@@ -171,4 +177,4 @@ const OrderPage = ({ account, contract, url }) => {
   );
 };
 
-export default OrderPage;
+export default Transporter;

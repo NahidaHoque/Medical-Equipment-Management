@@ -1,0 +1,92 @@
+.available-container {
+  padding: 30px;
+  
+}
+
+.available-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1c1c1c;
+}
+
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.equipment-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.equipment-card:hover {
+  transform: translateY(-5px);
+}
+
+.equipment-image {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background-color: #f0f0f0; /* shows light gray box if missing */
+  border-bottom: 1px solid #eee;
+}
+
+.equipment-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.equipment-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: rgb(91, 91, 182);
+}
+
+.equipment-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.order-btn {
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.order-btn:hover {
+  background-color: #0056b3;
+}
+
+.avail{
+    margin-top: 100px;       /* space above the heading */
+    margin-bottom: 20px;    /* space below the heading */
+    text-align: center;     /* center the text */
+    font-size: 24px;        /* heading size */
+    font-weight: 600;       /* slightly bold */
+    color: #1c1c1c; 
+}
+
+.avail h2{
+    color:greenyellow;
+}
+
+@media (max-width: 600px) {
+  .avail {
+    font-size: 20px;
+  }
+}

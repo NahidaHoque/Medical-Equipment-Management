@@ -1,0 +1,166 @@
+/* AvailableRawMaterials.css */
+
+/* Container */
+.available-materials-container {
+  width: 95%;
+  max-width: 1100px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.07);
+  overflow-x: auto; /* allows scroll if table is wider */
+  overflow-y: hidden; /* optional: hide vertical scrollbar */
+}
+
+/* Heading */
+.available-materials-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1a1a1a;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* Table */
+.material-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 10px;
+  table-layout: fixed; 
+  word-wrap: break-word;
+  
+}
+
+/* Table Header */
+.material-list th {
+  background-color: #030615;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px;
+  font-size: 15px;
+}
+
+/* Table Rows */
+.material-list td {
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Zebra stripe */
+.material-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect */
+.material-list tr:hover {
+  background-color: #eef0ff;
+  transition: 0.2s ease-in-out;
+}
+
+/* Image Icon (if you add images later) */
+.material-list img {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+/* Request Quantity Input */
+.qty-input {
+  width: 80px;
+  padding: 8px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  outline: none;
+  text-align: center;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.qty-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+/* Request Button */
+/* Request Button */
+/* Button container inside table cell */
+.action-buttons {
+  /* display: flex; */
+  justify-content: center; /* center buttons */
+  gap: 10px; /* space between buttons */
+  flex-wrap: wrap;
+}
+
+.request-btn,
+.cancel-btn {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.25s ease-in-out;
+}
+
+/* Request button color */
+.request-btn {
+  background-color: #030615;
+  color: #fff;
+}
+
+.request-btn:hover {
+  background-color: #171c36;
+  transform: scale(1.05);
+}
+
+/* Cancel button color */
+.cancel-btn {
+  background-color: #b91c1c;
+  color: #fff;
+}
+
+.cancel-btn:hover {
+  background-color: #f87171;
+  transform: scale(1.05);
+}
+
+
+/* Toastify font fix */
+.toastify-container {
+  font-size: 14px;
+}
+
+.equipment-button
+
+{
+  background-color: #4057cb;
+  transform: scale(1.05);
+  color:white;padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.25s ease-in-out;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .material-list th,
+  .material-list td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .request-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .available-materials-container h2 {
+    font-size: 22px;
+  }
+}
